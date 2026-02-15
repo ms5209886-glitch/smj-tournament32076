@@ -35,6 +35,12 @@
       border:none;
       border-radius:8px;
       cursor:pointer;
+      font-weight:bold;
+    }
+    #message{
+      margin-top:10px;
+      color:red;
+      font-size:14px;
     }
   </style>
 </head>
@@ -45,6 +51,7 @@
   <input type="email" id="email" placeholder="Email" required>
   <input type="password" id="password" placeholder="Password" required>
   <button onclick="login()">Login</button>
+  <p id="message"></p>
 </div>
 
 <script type="module">
@@ -52,7 +59,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDH41ugeiKWGFjGN5XPGkpRBOuqe7nsvsk",
+  apiKey: "YOUR_API_KEY",
   authDomain: "smj-tournament-c078f.firebaseapp.com",
   projectId: "smj-tournament-c078f",
   storageBucket: "smj-tournament-c078f.firebasestorage.app",
@@ -68,13 +75,20 @@ window.login = function(){
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-  .then(() => {
-    alert("Login Successful!");
-    window.location.href="dashboard.html";
-  })
-  .catch((error)=>{
-    alert(error.message);
-  });
+    .then((userCredential) => {
+
+      const user = userCredential.user;
+
+      alert("Login Successful ✅");
+
+      window.location.href = "dashboard.html";
+
+    })
+    .catch((error) => {
+
+      document.getElementById("message").innerText = error.message;
+
+    });
 }
 </script>
 
