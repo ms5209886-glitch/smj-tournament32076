@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body style="text-align:center;font-family:Arial;">
+  <h1>Welcome to SMJ Tournament 🎉</h1>
+  <button onclick="logout()">Logout</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH41ugeiKWGFjGN5XPGkpRBOuqe7nsvsk",
+  authDomain: "smj-tournament-c078f.firebaseapp.com",
+  projectId: "smj-tournament-c078f",
+  storageBucket: "smj-tournament-c078f.firebasestorage.app",
+  messagingSenderId: "453454075452",
+  appId: "1:453454075452:web:6cb7902b400ce1205ed539"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.logout = function(){
+  signOut(auth).then(()=>{
+    window.location.href="login.html";
+  });
+}
+</script>
+
+</body>
+</html>
