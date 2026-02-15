@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - SMJ Tournament</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{
+      font-family: Arial;
+      background: linear-gradient(135deg,#1e3c72,#2a5298);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      margin:0;
+    }
+    .box{
+      background:#fff;
+      padding:30px;
+      border-radius:15px;
+      width:300px;
+      text-align:center;
+    }
+    input{
+      width:100%;
+      padding:10px;
+      margin:8px 0;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+    button{
+      width:100%;
+      padding:10px;
+      background:green;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button onclick="login()">Login</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH41ugeiKWGFjGN5XPGkpRBOuqe7nsvsk",
+  authDomain: "smj-tournament-c078f.firebaseapp.com",
+  projectId: "smj-tournament-c078f",
+  storageBucket: "smj-tournament-c078f.firebasestorage.app",
+  messagingSenderId: "453454075452",
+  appId: "1:453454075452:web:6cb7902b400ce1205ed539"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+  .then(() => {
+    alert("Login Successful!");
+    window.location.href="dashboard.html";
+  })
+  .catch((error)=>{
+    alert(error.message);
+  });
+}
+</script>
+
+</body>
+</html>
