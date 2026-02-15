@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SMJ Tournament</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        .box {
-            background: rgba(0,0,0,0.5);
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        h1 {
-            font-size: 40px;
-        }
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            background: orange;
-            cursor: pointer;
-        }
-        button:hover {
-            background: red;
-            color: white;
-        }
-    </style>
+  <title>Register - SMJ Tournament</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{
+      font-family: Arial;
+      background: linear-gradient(135deg,#1e3c72,#2a5298);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      margin:0;
+    }
+    .box{
+      background:#fff;
+      padding:30px;
+      border-radius:15px;
+      width:300px;
+      text-align:center;
+    }
+    input{
+      width:100%;
+      padding:10px;
+      margin:8px 0;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+    button{
+      width:100%;
+      padding:10px;
+      background:red;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+    a{ display:block; margin-top:10px; }
+  </style>
 </head>
 <body>
 
 <div class="box">
-    <h1>Welcome to SMJ Tournament</h1>
-    <p>Register now and join the competition!</p>
-    <button onclick="window.location.href='register.html'">Register</button>
+  <h2>Create Account</h2>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button onclick="register()">Register</button>
+  <a href="login.html">Already have account? Login</a>
 </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH41ugeiKWGFjGN5XPGkpRBOuqe7nsvsk",
+  authDomain: "smj-tournament-c078f.firebaseapp.com",
+  projectId: "smj-tournament-c078f",
+  storageBucket: "smj-tournament-c078f.firebasestorage.app",
+  messagingSenderId: "453454075452",
+  appId: "1:453454075452:web:6cb7902b400ce1205ed539"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.register = function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+  .then(() => {
+    alert("Registration Successful!");
+    window.location.href="login.html";
+  })
+  .catch((error)=>{
+    alert(error.message);
+  });
+}
+</script>
 
 </body>
 </html>
