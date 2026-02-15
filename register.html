@@ -79,7 +79,7 @@ function submitForm(event) {
     var email = document.querySelector("input[type='email']").value;
     var phone = document.querySelector("input[type='tel']").value;
 
-    emailjs.send("service_m9tpc5i", "template_m274is9", {
+    emailjs.send("service_fm4vf5h", "template_m274is9", {
         name: name,
         email: email,
         phone: phone
@@ -89,6 +89,7 @@ function submitForm(event) {
         window.location.href = "index.html";
     }, function(error) {
         alert("Failed to send email. Try again.");
+        console.log(error);
     });
 }
 </script>
